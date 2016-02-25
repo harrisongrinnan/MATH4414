@@ -1,0 +1,10 @@
+clear; clc; format long e;
+f = @(t, y) [994*y(1) - 1998*y(2), 2997*y(1) - 5999*y(2)]/5;
+[timp, imp] = ode_rk4_imp_B(f, [0, 2.5], [1, -2], 2.5/0.02, 1e-12, 100);
+[texp, exp] = ode_rk4(f, [0, 2.5], [1,-2], 2.5/0.02); clc;
+iimp = find(timp == 2.5);
+iexp = find(texp == 2.5);
+fprintf('%.15e\n', imp(imp, 1));
+fprintf('%.15e\n', exp(iimp, 1));
+fprintf('%.15e\n', imp(iexp, 2));
+fprintf('%.15e\n', exp(iexp, 2));
